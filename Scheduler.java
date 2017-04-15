@@ -155,7 +155,7 @@ public class Scheduler implements Runnable {
 		synchronized(this) {
 			for(int i = 0; i < size_of_main_memory; i++) {
 				// when releasing we must always set MainMemory = null
-				if(MainMemory[i] == null) {
+				if(MainMemory[i] == null) { //add variable to first available place
 					flag = true;
 					MainMemory[i] = newVar;
 				}
@@ -917,6 +917,35 @@ public class Scheduler implements Runnable {
 
 		}
 
+	}
+
+	public void executeNextCommand() {
+		
+		String[] tokens;
+		String command;
+		synchronized(this) {
+			command = commands_from_file.remove(0);
+		}
+		
+		tokens = command.split("\\s");
+		
+		switch(tokens[0]) {
+			
+		case "Store":
+			store(tokens[1], Integer.parseInt(tokens[2]));
+			break;
+	/*	case "Lookup":
+			Lookup(tokens[1], Integer.parseInt(tokens[2]));   DON'T HAVE THIS YET
+			break;
+			*/
+		case "Release":
+			release(tokens[1]);
+			break;
+			
+			default:
+				System.out.println("Command not found. problem in function executeNextCommand() in class Scheduler");
+		}	
+		
 	}
 
 }

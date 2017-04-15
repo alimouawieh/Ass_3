@@ -1,4 +1,5 @@
 
+import java.util.Random;
 @SuppressWarnings("rawtypes")
 //Scheduler will know how long each Process has been run and get update 
 //the Process's burst time accordingly using updateBurtsTime()
@@ -48,10 +49,10 @@ class MyProcess implements Runnable {
 	//when a threads run function returns the thread will end
 	public void run() { //scheduler updates the time of the process
 		//all code goes here
-		int i = 0; 
+//		int i = 0; 
 			//THIS RUNS UNTIL SCHEDULER CALLS .interupt() on it
 			while(!Thread.interrupted()) {
-				try {
+		/*		try {
 					i++;
 				if (i % 100 == 0) {
 					System.out.println("Process : " + PID + " is executing on the CPU");
@@ -63,11 +64,24 @@ class MyProcess implements Runnable {
 		//			http://stackoverflow.com/questions/1087475/when-does-javas-thread-sleep-throw-interruptedexception
 					Thread.currentThread().interrupt();
 				//	e.printStackTrace();
+				
+				 */
+				
+				Random ran = new Random();
+				int executionTime = ran.nextInt(200);
+				//this function reads the next command from ArrayList commands_from_file and executes the command
+				s.executeNextCommand(); 
+				try {
+					Thread.sleep(executionTime);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				}
 			
 		}
 	
-	}
+	
 	
 	
 	public void setQuantum(int prior) {

@@ -63,6 +63,11 @@ public class Variable {
 	public void setBitCounter(int[] bitCounter) {
 		this.bitCounter = bitCounter;
 	}
-	
+	/*
+	@Override
+	public String toString() {
+		return getVarID()
+	}
+	*/
 	
 }
